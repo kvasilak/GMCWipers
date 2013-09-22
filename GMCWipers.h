@@ -24,10 +24,6 @@ void WipersIntermitent(int val);
 void WipersMisting();
 void WipersDo();
 
-enum IStates_e {iSTATE_PARK, iSTATE_PARK_WAIT, iSTATE_DELAY, iSTATE_UNPARK, iSTATE_UNPARK_WAIT};
-
-enum MStates_e {mSTATE_SET, mSTATE_UNPARK, mSTATE_COUNT, mSTATE_WAIT, mSTATE_PARK};
-
 Servo myservo;  // create servo object to control a servo
 
 int val;    // variable to read the value from the analog pin
@@ -36,10 +32,10 @@ unsigned long StartTime;
 
 //i/o
 int potpin;  // analog pin used to connect the potentiometer
-int parkPin;
-int modePin;
-int servoPin;
-int mistPin;
+int parkPin;    // Wipers are parked
+int modePin;    // speed vs intermittent
+int servoPin;   // servos pwn pin
+int mistPin;    // the windshield washer is squirting
 
 //Servo positions
 int DEADBAND;	//any pot value below this is considered off

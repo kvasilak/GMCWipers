@@ -31,6 +31,10 @@
 #include <Arduino.h> 
 #include "GMCWipers.h"
 
+static enum IStates_e {iSTATE_PARK, iSTATE_PARK_WAIT, iSTATE_DELAY, iSTATE_UNPARK, iSTATE_UNPARK_WAIT};
+
+static enum MStates_e {mSTATE_SET, mSTATE_UNPARK, mSTATE_COUNT, mSTATE_WAIT, mSTATE_PARK};
+
 GMCWipers::GMCWipers() :
 potpin(0),
 parkPin(12),
@@ -79,7 +83,6 @@ void GMCWipers::WiperSpeed(int val)
   val = map(val, DEADBAND, 1023, SPEED_OFF, SPEED_HIGH);     // scale it to use it with the servo
   myservo.write(val);                  // sets the servo position according to the scaled value
   delay(15);                           // waits for the servo to get there
-
 }
 
 void GMCWipers::WipersIntermitent(int val)
@@ -209,6 +212,10 @@ void GMCWipers::WipersDo()
 				misting = true;
 			}
         }
+		else //in intermitent mode switch to misting mode
+		{
+			misting = true;
+		}
 		else //in intermitent mode switch to misting mode
 		{
 			misting = true;
